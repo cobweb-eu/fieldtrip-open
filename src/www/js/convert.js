@@ -48,11 +48,17 @@ define(function(require){
     var jsonToHtml = function(jsonStr, fileName) {
         var self = this;
         var form = JSON.parse(jsonStr);
-
+        
+        var context = form.context || '';
+        var vocab = '';
+        if( context !== '' ){
+            vocab = ' vocab=\"' + context + '\"';
+        }
         //add title
         form.title = form.title.replace('"', '&quot;');
         var html = '<form data-title=\"'+
-                  form.title+'\" data-ajax=\"false\" novalidate>\n';
+                  form.title+'\" data-ajax=\"false\"'+
+                  vocab +' novalidate>\n';
 
         //add geometry
         html+='<div class="fieldcontain fieldcontain-geometryType"'+
